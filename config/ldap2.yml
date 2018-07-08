@@ -1,0 +1,21 @@
+development:
+ - 
+  host: "218.22.75.34"
+  port: "38900"
+  attribute: uid
+  base: dc=whit,dc=ah,dc=cn
+  admin_user: uid=whzyedu,ou=Manager,dc=whit,dc=ah,dc=cn
+  admin_password: whzyedu#123
+  ssl: false
+  domain: "FIRST"
+ - 
+  host: "218.22.75.35"
+  port: "38900"
+  attribute: uid
+  base: dc=whit,dc=ah,dc=cn
+  admin_user: uid=whzyedu,ou=Manager,dc=whit,dc=ah,dc=cn
+  admin_password: whzyedu#123
+  ssl: false
+  domain: "SECOND"
+app_id: 73336ACC8638F6EA
+app_secret: 21932CB230BFEBD942EF46D352E03B07
