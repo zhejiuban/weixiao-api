@@ -32,7 +32,7 @@ class Aes
   end 
 
   def weixin_decrypt_json(str)
-    decrypted = JSON.parse(decrypt(str).strip.gsub(/\x00/, ''))                                                                                                                                                                                       
+    decrypted = JSON.parse(decrypt(str).strip.gsub(/\x00|\v/, ''))                                                                                                                                                                                       
     raise('Invalid Buffer') if decrypted["app_key"] != @app_key
 
     decrypted

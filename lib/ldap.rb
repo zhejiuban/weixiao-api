@@ -11,7 +11,8 @@ class Ldap
         @ldap.auth ldap_config[:admin_user], ldap_config[:admin_password]
         break if @ldap.bind
       rescue
-        logger.error "LDAP 连接错误"
+        Rails.logger = Logger.new(STDOUT)
+        Rails.logger.error "LDAP 连接错误"
       end
     end
   end
@@ -22,5 +23,24 @@ class Ldap
       :filter => "(uid=#{username})",
       :password => password
       )
+  end
+
+  def weixin_raw_data(username, password)
+    result = auth(username, password)
+
+    if result and result.count == 1
+      if result.first.memberof.first == "cn=xs,ou=Groups,dc=whit,dc=ah,dc=cn"
+        identity_type = "学生"
+      elsif result.first.memberof.first == "cn=jzg,ou=Groups,dc=whit,dc=ah,dc=cn"
+        identity_type = "教师"
+      end
+      raw_data = {
+        "card_number" => result.first.uid.first,
+        "name" => result.first.cn.first,
+        "identity_type" => identity_type
+      }.to_json
+    else
+      result
+    end
   end
 end
