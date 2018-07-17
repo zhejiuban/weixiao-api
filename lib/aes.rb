@@ -11,7 +11,7 @@ class Aes
   end
 
   def encrypt(str)
-    str = str + "\0" * (16 - str.length % 16)
+    # str = str + "\0" * (16 - str.length % 16)
     crypto = Mcrypt.new(:rijndael_128, :cbc, @app_key, @app_secret, :zeros)
     enc = crypto.encrypt(str).to_hex_string(false)
     # cipher = OpenSSL::Cipher::AES128.new(:CBC)
