@@ -29,16 +29,19 @@ class Ldap
     result = auth(username, password)
 
     if result and result.count == 1
+      card_number = result.first.uid.first
+      name = result.first.cn.first.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
       if result.first.memberof.first == "cn=xs,ou=Groups,dc=whit,dc=ah,dc=cn"
-        identity_type = "学生"
+        identity_type = "学生".unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
       elsif result.first.memberof.first == "cn=jzg,ou=Groups,dc=whit,dc=ah,dc=cn"
-        identity_type = "教师"
+        identity_type = "教师".unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
       end
-      raw_data = {
-        "card_number" => result.first.uid.first,
-        "name" => result.first.cn.first,
-        "identity_type" => identity_type
-      }.to_json
+      # raw_data = {
+      #   "card_number" => result.first.uid.first,
+      #   "name" => result.first.cn.first.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join,
+      #   "identity_type" => identity_type.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
+      # }.as_json
+      raw_data = "{\"card_number\":\"#{card_number}\",\"name\":\"#{name}\",\"identity_type\":\"#{identity_type}\"}"
     else
       result
     end
