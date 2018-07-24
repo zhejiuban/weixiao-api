@@ -25,6 +25,21 @@ class Ldap
       )
   end
 
+  def auth_with_database(username,password)
+    result = auth(username, password)
+    if result and result.count == 1
+      if result.first.memberof.first == "cn=xs,ou=Groups,dc=whit,dc=ah,dc=cn"
+        user = Student.find_by_card_number username
+      elsif result.first.memberof.first == "cn=jzg,ou=Groups,dc=whit,dc=ah,dc=cn"
+        user = Teacher.find_by_card_number username
+      else
+        user = Alumnu.find_by_card_number username
+      end
+    else
+      result
+    end
+  end
+
   def weixin_raw_data(username, password)
     result = auth(username, password)
 
@@ -36,11 +51,6 @@ class Ldap
       elsif result.first.memberof.first == "cn=jzg,ou=Groups,dc=whit,dc=ah,dc=cn"
         identity_type = "教职工".unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
       end
-      # raw_data = {
-      #   "card_number" => result.first.uid.first,
-      #   "name" => result.first.cn.first.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join,
-      #   "identity_type" => identity_type.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
-      # }.as_json
       raw_data = "{\"card_number\":\"#{card_number}\",\"name\":\"#{name}\",\"identity_type\":\"#{identity_type}\"}"
     else
       result

@@ -13,7 +13,8 @@ module Api
         else
           render json: {
             "code" => 1,
-            'errmsg' => 'Login error!'
+            'message' => 'Login error!',
+            "app_key" => Rails.application.credentials[Rails.env.to_sym][:app_key]
         }
         end
       end

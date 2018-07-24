@@ -103,6 +103,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    mysql2 (0.5.2)
     net-ldap (0.16.1)
     nio4r (2.3.1)
     nokogiri (1.8.2)
@@ -202,6 +203,7 @@ DEPENDENCIES
   hex_string
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  mysql2
   net-ldap
   puma (~> 3.11)
   rails (~> 5.2.0)
