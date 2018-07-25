@@ -8,7 +8,6 @@ module Api
         ldap = Ldap.new
         weixin_request = JSON.parse(aes.decrypt params["raw_data"])
         result = ldap.auth_with_database weixin_request["card_number"], weixin_request["password"]
-        # result = ldap.weixin_raw_data weixin_request["card_number"], weixin_request["password"]
         if result
           @raw_data = aes.encrypt result
         else
