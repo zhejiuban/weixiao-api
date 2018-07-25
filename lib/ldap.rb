@@ -35,7 +35,7 @@ class Ldap
       else
         user = Alumnu.find_by_card_number username
       end
-      raw_data = "{\"card_number\":\"#{user.card_number}\",\"name\":\"#{user.name}\",\"gender\":\"#{user.gender}\",\"grade\":\"#{user.grade}\",\"college\":\"#{user.college}\",\"profession\":\"#{user.profession}\",\"class\":\"#{user.bj}\",\"identity_type\":\"#{user.identity_type}\",\"identity_title\":\"#{user.identity_title}\",\"id_card\":\"#{user.id_card}\",\"telephone\":\"#{user.telephone}\",\"organization\":\"#{user.organization}\",\"physical_card_number\":\"#{user.physical_card_number}\"}"
+      raw_data = "{\"card_number\":\"#{user.card_number}\",\"name\":\"#{to_unicode(user.name)}\",\"gender\":\"#{to_unicode(user.gender)}\",\"grade\":\"#{to_unicode(user.grade)}\",\"college\":\"#{to_unicode(user.college)}\",\"profession\":\"#{to_unicode(user.profession)}\",\"class\":\"#{to_unicode(user.bj)}\",\"identity_type\":\"#{to_unicode(user.identity_type)}\",\"identity_title\":\"#{to_unicode(user.identity_title)}\",\"id_card\":\"#{user.id_card}\",\"telephone\":\"#{user.telephone}\",\"organization\":\"#{to_unicode(user.organization)}\",\"physical_card_number\":\"#{to_unicode(user.physical_card_number)}\"}"
     else
       result
     end
@@ -59,6 +59,10 @@ class Ldap
   end
 
   def to_unicode(str)
-    str.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
+    if str and str.length > 0
+      str.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join 
+    else
+      ""
+    end
   end
 end
