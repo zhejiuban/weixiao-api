@@ -57,4 +57,8 @@ class Ldap
       result
     end
   end
+
+  def to_unicode(str)
+    str.unpack('U*').map{ |i| "\\u" + i.to_s(16).rjust(4, '0') }.join
+  end
 end
