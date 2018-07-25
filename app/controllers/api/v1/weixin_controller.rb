@@ -7,13 +7,13 @@ module Api
         aes = Aes.new
         ldap = Ldap.new
         weixin_request = JSON.parse(aes.decrypt params["raw_data"])
-        result = ldap.weixin_raw_data weixin_request["card_number"], weixin_request["password"]
+        result = ldap.auth_with_database weixin_request["card_number"], weixin_request["password"]
         if result
           @raw_data = aes.encrypt result
         else
           render json: {
             "code" => 1,
-            'message' => 'Login error!',
+            'message' => '账号或密码不正确，请检查后重新输入!',
             "app_key" => Rails.application.credentials[Rails.env.to_sym][:app_key]
         }
         end

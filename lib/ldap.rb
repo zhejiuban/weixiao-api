@@ -39,7 +39,7 @@ class Ldap
       \"grade\":\"#{user.grade}\",\"college\":\"#{user.college}\",\"profession\":\"#{user.profession}\",
       \"class\":\"#{user.bj}\",\"identity_type\":\"#{user.identity_type}\"}\"identity_title\":\"#{user.identity_title}\",
       \"id_card\":\"#{user.id_card}\",\"telephone\":\"#{user.telephone}\",\"organization\":\"#{user.organization}\",
-      \"physical_card_num\":\"#{user.physical_card_num}\""
+      \"physical_card_number\":\"#{user.physical_card_number}\""
     else
       result
     end
