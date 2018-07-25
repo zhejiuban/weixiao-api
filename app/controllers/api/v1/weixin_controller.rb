@@ -13,7 +13,7 @@ module Api
         else
           render json: {
             "code" => 1,
-            'message' => '账号或密码不正确，请检查后重新输入!',
+            'message' => '账号或密码不正确，请重新输入!',
             "app_key" => Rails.application.credentials[Rails.env.to_sym][:app_key]
         }
         end

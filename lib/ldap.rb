@@ -35,11 +35,7 @@ class Ldap
       else
         user = Alumnu.find_by_card_number username
       end
-      raw_data = "{\"card_number\":\"#{user.card_number}\",\"name\":\"#{user.name}\",\"gender\":\"#{user.gender}\",
-      \"grade\":\"#{user.grade}\",\"college\":\"#{user.college}\",\"profession\":\"#{user.profession}\",
-      \"class\":\"#{user.bj}\",\"identity_type\":\"#{user.identity_type}\"}\"identity_title\":\"#{user.identity_title}\",
-      \"id_card\":\"#{user.id_card}\",\"telephone\":\"#{user.telephone}\",\"organization\":\"#{user.organization}\",
-      \"physical_card_number\":\"#{user.physical_card_number}\""
+      raw_data = "{\"card_number\":\"#{user.card_number}\",\"name\":\"#{user.name}\",\"gender\":\"#{user.gender}\",\"grade\":\"#{user.grade}\",\"college\":\"#{user.college}\",\"profession\":\"#{user.profession}\",\"class\":\"#{user.bj}\",\"identity_type\":\"#{user.identity_type}\"}\"identity_title\":\"#{user.identity_title}\",\"id_card\":\"#{user.id_card}\",\"telephone\":\"#{user.telephone}\",\"organization\":\"#{user.organization}\",\"physical_card_number\":\"#{user.physical_card_number}\""
     else
       result
     end
